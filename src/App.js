@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
+import {UserContext} from "./contexts/UserContext";
 /**import product from "./product.json";
 import Product from "./components/Product";*/
 import styled from "styled-components";
@@ -8,12 +9,12 @@ import Header from "./components/Header";
 const Welcome = React.lazy(() => import("./pages/Welcome"));
 const Products = React.lazy(() => import("./pages/Products"));
 const ProductDetails = React.lazy(() => import("./pages/ProductDetails"));
-
 function App() {
-  const connectedUser =undefined; 
+  const [connectedUser, setConnectedUser] =useState(null); 
 
   return (
     <>
+    <UserContext.Provider value={[connectedUser, setConnectedUser]}>
       <Header> </Header>{" "}
       <AppFrame className="App">
         <BrowserRouter basename="/">
@@ -66,6 +67,7 @@ function App() {
  </Suspense>
         </BrowserRouter>
       </AppFrame>
+      </UserContext.Provider>
     </>
   );
 }

@@ -1,20 +1,30 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-export default class Header extends Component {
-  render() {
-    return (
-      <HeaderFrame>
-        <ul>
-          <li>
-            <a href="/welcome">Welcome</a>
-          </li>
-          <li>
-            <a href="/products">Products</a>
-          </li>
-        </ul>
-      </HeaderFrame>
-    );
+import { UserContext } from "../contexts/UserContext";
+
+export default function Header() {
+  const [user, setUser] = useContext(UserContext);
+
+  function toogleUser() {
+    !user ? setUser({ name: "test", roles: ["admin"] }) : setUser(null);
   }
+
+  return (
+    <HeaderFrame>
+      <ul>
+        <li>
+          <a href="/welcome">Welcome</a>
+        </li>
+        <li>
+          <a href="/products">Products</a>
+        </li>
+        <li>
+          connected User:{user?.name ?? "none"}{" "}
+          <button onClick={toogleUser}>toogleUser</button>
+        </li>
+      </ul>
+    </HeaderFrame>
+  );
 }
 const HeaderFrame = styled.div`
   min-height: 50px;
