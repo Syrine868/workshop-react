@@ -17,7 +17,7 @@ export default function ProductFun(props) {
   return (
     <ProductFrame>
       <ProductImageWrapper>
-        <ProductImage src={props.product.img}></ProductImage>
+        <ProductImage src={process.env.REACT_APP_API_URL_UPLOADS + "/" + props.product.image}></ProductImage>
       </ProductImageWrapper>
       <ProductInfoWrapper>
         <span>
